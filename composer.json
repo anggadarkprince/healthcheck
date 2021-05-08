@@ -1,5 +1,5 @@
 {
-    "name": "coreproc/health-checks",
+    "name": "anggadarkprince/health-checks",
     "type": "project",
     "require": {
         "vlucas/phpdotenv": "^2.0",
