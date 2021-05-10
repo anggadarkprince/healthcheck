@@ -48,11 +48,11 @@ class DBReplicationCheck implements HealthCheck
         $this->primaryResult = $this->conn->query("SHOW STATUS LIKE '%primary%'");
         $replicationPrimary = $this->primaryResult->fetch_assoc();
 
-        if ($replicationRecovery) {
+        if ($replicationRecovery || count($replicationStatus) <= 1) {
             return $response
                 ->setContent(json_encode([
                     'status'      => '500',
-                    'message'     => 'Internal Server Error',
+                    'message'     => 'Replication Group Invalid',
                     'description' => 'Replication group member invalid',
                     'data' => [
                         'members' => $replicationStatus,
