@@ -71,9 +71,9 @@ class ServerCheck implements HealthCheck
                 if (strpos($row, 'Mem') !== false) {
                     $memories = explode(" ", preg_replace('/\s+/', ' ', $row));
                     $ram = [
-                        'total' => ($memories[1] / 1000) . ' GB',
-                        'used' => ($memories[2] / 1000) . ' GB',
-                        'available' => (end($memories) / 1000) . ' GB'
+                        'total' => number_format($memories[1] / 1000, 2) . ' GB',
+                        'used' => number_format($memories[2] / 1000, 2) . ' GB',
+                        'available' => number_format(end($memories) / 1000, 2) . ' GB'
                     ];
                 }
             }
