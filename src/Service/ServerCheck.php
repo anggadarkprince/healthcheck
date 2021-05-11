@@ -110,7 +110,7 @@ class ServerCheck implements HealthCheck
     {
         if (strpos($this->os, 'win') !== false) {
             return [
-                'Operating System' => 'Windows'
+                'operating_system' => 'Windows'
             ];
         } else {
             $data = explode("\n", shell_exec("hostnamectl"));
@@ -118,7 +118,7 @@ class ServerCheck implements HealthCheck
             foreach ($data as $line) {
                 if (!empty(trim($line))) {
                     list($key, $val) = explode(":", $line);
-                    $result[trim($key)] = trim($val);
+                    $result[str_replace(' ', '_', strtolower(trim($key)))] = trim($val);
                 }
             }
             return $result;
