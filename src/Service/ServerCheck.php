@@ -38,11 +38,11 @@ class ServerCheck implements HealthCheck
         $disk = [
             'total' => $diskTotal,
             'free' => $diskFree,
-            'use_percent' => $diskUse
+            'usage_percent' => $diskUse
         ];
 
         foreach ($disk as $key => $value) {
-            if ($key != 'use_percent') {
+            if ($key != 'usage_percent') {
                 if ($value < 1024) {
                     $disk[$key] = $value . ' B';
                 } elseif ($value < 1048576) {
