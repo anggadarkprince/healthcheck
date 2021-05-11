@@ -33,24 +33,24 @@ class ServerCheck implements HealthCheck
     {
         $diskTotal = disk_total_space('/');
         $diskFree = disk_free_space('/');
-        $diskUse = round(100 - (($diskFree / $diskTotal) * 100)) . '%';
+        $diskUse = number_format(100 - (($diskFree / $diskTotal) * 100), 1);
 
         $disk = [
             'total' => $diskTotal,
             'free' => $diskFree,
-            'use' => $diskUse
+            'use_percent' => $diskUse
         ];
 
         foreach ($disk as $key => $value) {
-            if ($key != 'use') {
+            if ($key != 'use_percent') {
                 if ($value < 1024) {
                     $disk[$key] = $value . ' B';
                 } elseif ($value < 1048576) {
-                    $disk[$key] = round($value / 1024, 2) . 'KB';
+                    $disk[$key] = round($value / 1024, 2) . ' KB';
                 } elseif ($value < 1048576000) {
-                    $disk[$key] = round($value / 1048576, 2) . 'MB';
+                    $disk[$key] = round($value / 1048576, 2) . ' MB';
                 } else {
-                    $disk[$key] = round($value / 1048576000, 2) . 'GB';
+                    $disk[$key] = round($value / 1048576000, 2) . ' GB';
                 }
             }
         }
