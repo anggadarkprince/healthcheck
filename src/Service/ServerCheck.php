@@ -68,8 +68,8 @@ class ServerCheck implements HealthCheck
                 $result = [];
                 foreach ($data as $line) {
                     if (!empty(trim($line))) {
-                        list($size, $path) = explode(" ", preg_replace('/\s+/', ' ', $line));
-                        $dir = substr($path, strlen($directoryReport));
+                        list($size, $path) = explode(":", $line);
+                        $dir = substr(trim($path), strlen($directoryReport));
                         $result[trim($dir)] = trim($size);
                     }
                 }
