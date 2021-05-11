@@ -4,6 +4,7 @@ use HealthChecks\HealthCheckMonitor;
 use HealthChecks\Response\UncacheableResponse;
 use HealthChecks\Service\DBCheck;
 use HealthChecks\Service\DBReplicationCheck;
+use HealthChecks\Service\ObjectStorageCheck;
 use HealthChecks\Service\WebCheck;
 
 require '../vendor/autoload.php';
@@ -16,7 +17,8 @@ $dotenv->load();
 $services = [
     new WebCheck(),
     new DBCheck(),
-    new DBReplicationCheck()
+    new DBReplicationCheck(),
+    new ObjectStorageCheck(),
 ];
 $healthCheckMonitor = new HealthCheckMonitor();
 
