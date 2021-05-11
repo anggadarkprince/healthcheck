@@ -5,6 +5,7 @@ namespace HealthChecks;
 use HealthChecks\Response\UncacheableResponse;
 use ReflectionClass;
 use ReflectionException;
+use Symfony\Component\HttpFoundation\Response;
 
 class HealthCheckMonitor
 {
@@ -69,5 +70,15 @@ class HealthCheckMonitor
                 'description' => "Invalid internal implementation"
             ]))
             ->setStatusCode(500);
+    }
+
+    /**
+     * Check and return health monitoring.
+     *
+     * @return Response
+     */
+    public function send()
+    {
+        return $this->check()->send();
     }
 }

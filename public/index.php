@@ -5,6 +5,7 @@ use HealthChecks\Response\UncacheableResponse;
 use HealthChecks\Service\DBCheck;
 use HealthChecks\Service\DBReplicationCheck;
 use HealthChecks\Service\ObjectStorageCheck;
+use HealthChecks\Service\ServerCheck;
 use HealthChecks\Service\WebCheck;
 
 require '../vendor/autoload.php';
@@ -19,6 +20,7 @@ $services = [
     new DBCheck(),
     new DBReplicationCheck(),
     new ObjectStorageCheck(),
+    new ServerCheck(),
 ];
 $healthCheckMonitor = new HealthCheckMonitor();
 
