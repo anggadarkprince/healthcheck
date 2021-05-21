@@ -2,6 +2,7 @@
 
 use HealthChecks\HealthCheckMonitor;
 use HealthChecks\Response\UncacheableResponse;
+use HealthChecks\Service\BackupCheck;
 use HealthChecks\Service\DBCheck;
 use HealthChecks\Service\DBReplicationCheck;
 use HealthChecks\Service\ObjectStorageCheck;
@@ -21,6 +22,7 @@ $services = [
     new DBReplicationCheck(),
     new ObjectStorageCheck(),
     new ServerCheck(),
+    new BackupCheck(),
 ];
 $healthCheckMonitor = new HealthCheckMonitor();
 
