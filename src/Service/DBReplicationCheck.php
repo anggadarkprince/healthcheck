@@ -27,7 +27,7 @@ class DBReplicationCheck implements HealthCheck
         if ($this->conn->connect_error) {
             return $response
                 ->setContent(json_encode([
-                    'status'      => '500',
+                    'status'      => 500,
                     'message'     => 'Internal Server Error',
                     'description' => $this->conn->connect_error
                 ]))
@@ -51,7 +51,7 @@ class DBReplicationCheck implements HealthCheck
         if ($replicationRecovery || count($replicationStatus) <= 1) {
             return $response
                 ->setContent(json_encode([
-                    'status'      => '500',
+                    'status'      => 500,
                     'message'     => 'Replication Group Invalid',
                     'description' => 'Replication group member invalid',
                     'data' => [

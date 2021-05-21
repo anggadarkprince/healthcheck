@@ -25,7 +25,7 @@ class DBCheck implements HealthCheck
         if ($this->conn->connect_error) {
             return $response
                 ->setContent(json_encode([
-                    'status'      => '500',
+                    'status'      => 500,
                     'message'     => 'Internal Server Error',
                     'description' => $this->conn->connect_error
                 ]))
