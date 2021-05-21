@@ -10,7 +10,7 @@ use HealthChecks\Service\WebCheck;
 
 require '../vendor/autoload.php';
 
-set_error_handler("customError", E_ALL);
+//set_error_handler("customError", E_ALL);
 
 $dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
 $dotenv->load();
