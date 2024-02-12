@@ -11,10 +11,10 @@ class DBCheck implements HealthCheck
 
     public function init()
     {
-        $dbHost = getenv('DB_HOST');
-        $dbDatabase = getenv('DB_DATABASE');
-        $dbUsername = getenv('DB_USERNAME');
-        $dbPassword = getenv('DB_PASSWORD');
+        $dbHost = $_ENV['DB_HOST'];
+        $dbDatabase = $_ENV['DB_DATABASE'];
+        $dbUsername = $_ENV['DB_USERNAME'];
+        $dbPassword = $_ENV['DB_PASSWORD'];
 
         $this->conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbDatabase);
     }

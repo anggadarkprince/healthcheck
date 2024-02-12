@@ -5,7 +5,7 @@ use HealthChecks\Service\BackupCheck;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $backupCheck = new BackupCheck();

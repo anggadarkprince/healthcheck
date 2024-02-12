@@ -13,12 +13,12 @@ class ObjectStorageCheck implements HealthCheck
     {
         $this->s3 = new S3Client([
             'version' => 'latest',
-            'region' => getenv('S3_DEFAULT_REGION'),
+            'region' => $_ENV['S3_DEFAULT_REGION'],
             'credentials' => [
-                'key' => getenv('S3_ACCESS_KEY_ID'),
-                'secret' => getenv('S3_SECRET_ACCESS_KEY'),
+                'key' => $_ENV['S3_ACCESS_KEY_ID'],
+                'secret' => $_ENV['S3_SECRET_ACCESS_KEY'],
             ],
-            'endpoint' => getenv('S3_ENDPOINT'),
+            'endpoint' => $_ENV['S3_ENDPOINT'],
             'http' => [
                 'verify' => false
             ]
@@ -64,9 +64,9 @@ class ObjectStorageCheck implements HealthCheck
                 'status' => 200,
                 'message' => 'OK',
                 'data' => [
-                    'endpoint' => getenv('S3_ENDPOINT'),
-                    'region' => getenv('S3_DEFAULT_REGION'),
-                    'reserved_space' => floatval(getenv('S3_RESERVED_SPACE')),
+                    'endpoint' => $_ENV['S3_ENDPOINT'],
+                    'region' => $_ENV['S3_DEFAULT_REGION'],
+                    'reserved_space' => floatval($_ENV['S3_RESERVED_SPACE']),
                     'reserved_space_unit' => 'GB',
                     'owner' => [
                         'id' => $buckets['Owner']['ID'],
@@ -75,9 +75,9 @@ class ObjectStorageCheck implements HealthCheck
                     'buckets' => $bucketList,
                     'total_usage' => $totalUsageAll,
                     'total_usage_unit' => 'GB',
-                    'total_left' => getenv('S3_RESERVED_SPACE') - $totalUsageAll,
+                    'total_left' => $_ENV['S3_RESERVED_SPACE'] - $totalUsageAll,
                     'total_left_unit' => 'GB',
-                    'usage_percent' => $totalUsageAll / getenv('S3_RESERVED_SPACE') * 100,
+                    'usage_percent' => $totalUsageAll / $_ENV['S3_RESERVED_SPACE'] * 100,
                 ]
             ]))
             ->setStatusCode(200);

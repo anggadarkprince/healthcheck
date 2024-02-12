@@ -55,7 +55,7 @@ class ServerCheck implements HealthCheck
             }
         }
 
-        $directoryReport = getenv('SERVER_DISK_DIRECTORY_SUMMARY');
+        $directoryReport = $_ENV['SERVER_DISK_DIRECTORY_SUMMARY'];
         if (!empty($directoryReport)) {
             if (strpos($this->os, 'win') !== false) {
                 $disk['directory_report'] = [

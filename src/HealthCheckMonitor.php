@@ -3,20 +3,21 @@
 namespace HealthChecks;
 
 use HealthChecks\Response\UncacheableResponse;
+use HealthChecks\Service\HealthCheck;
 use ReflectionClass;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Response;
 
 class HealthCheckMonitor
 {
-    private $healthCheck;
+    private HealthCheck $healthCheck;
 
     /**
      * HealthCheckMonitor constructor.
      *
-     * @param $healthCheck
+     * @param HealthCheck|null $healthCheck
      */
-    public function __construct($healthCheck = null)
+    public function __construct(HealthCheck $healthCheck = null)
     {
         $this->healthCheck = $healthCheck;
     }
@@ -24,15 +25,15 @@ class HealthCheckMonitor
     /**
      * @param mixed $healthCheck
      */
-    public function setHealthCheck($healthCheck)
+    public function setHealthCheck(HealthCheck $healthCheck): void
     {
         $this->healthCheck = $healthCheck;
     }
 
     /**
-     * @return mixed
+     * @return HealthCheck|null
      */
-    public function getHealthCheck()
+    public function getHealthCheck(): ?HealthCheck
     {
         return $this->healthCheck;
     }
@@ -44,7 +45,6 @@ class HealthCheckMonitor
     {
         try {
             $reflection = new ReflectionClass($this->healthCheck);
-            $result = null;
 
             if ($reflection->hasMethod('init')) {
                 $reflection->getMethod('init')->invoke($this->healthCheck);
@@ -77,7 +77,7 @@ class HealthCheckMonitor
      *
      * @return Response
      */
-    public function send()
+    public function send(): Response
     {
         return $this->check()->send();
     }

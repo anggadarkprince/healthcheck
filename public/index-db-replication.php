@@ -7,7 +7,7 @@ require '../vendor/autoload.php';
 
 set_error_handler("customError", E_ALL);
 
-$dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $dbCheck = new DBReplicationCheck();

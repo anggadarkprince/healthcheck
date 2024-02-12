@@ -13,10 +13,10 @@ class DBReplicationCheck implements HealthCheck
 
     public function init()
     {
-        $dbHost = getenv('DB_REPLICATION_HOST');
-        $dbDatabase = getenv('DB_REPLICATION_DATABASE');
-        $dbUsername = getenv('DB_REPLICATION_USERNAME');
-        $dbPassword = getenv('DB_REPLICATION_PASSWORD');
+        $dbHost = $_ENV['DB_REPLICATION_HOST'];
+        $dbDatabase = $_ENV['DB_REPLICATION_DATABASE'];
+        $dbUsername = $_ENV['DB_REPLICATION_USERNAME'];
+        $dbPassword = $_ENV['DB_REPLICATION_PASSWORD'];
 
         $this->conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbDatabase);
     }
