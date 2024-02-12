@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HealthCheckMonitor
 {
-    private HealthCheck $healthCheck;
+    private HealthCheck | null $healthCheck;
 
     /**
      * HealthCheckMonitor constructor.
