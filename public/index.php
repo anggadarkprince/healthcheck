@@ -6,6 +6,7 @@ use HealthChecks\Service\BackupCheck;
 use HealthChecks\Service\DBCheck;
 use HealthChecks\Service\DBReplicationCheck;
 use HealthChecks\Service\ObjectStorageCheck;
+use HealthChecks\Service\RemoteBackupCheck;
 use HealthChecks\Service\ServerCheck;
 use HealthChecks\Service\WebCheck;
 
@@ -23,6 +24,7 @@ $services = [
     new ObjectStorageCheck(),
     new ServerCheck(),
     new BackupCheck(),
+    new RemoteBackupCheck(),
 ];
 $healthCheckMonitor = new HealthCheckMonitor();
 
