@@ -17,15 +17,27 @@ require '../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-$services = [
-    new WebCheck(),
-    new DBCheck(),
-    new DBReplicationCheck(),
-    new ObjectStorageCheck(),
-    new ServerCheck(),
-    new BackupCheck(),
-    new RemoteBackupCheck(),
-];
+$configs = file_get_contents('../config.json');
+
+$services = [];
+if ($configs !== false) {
+    $configs = json_decode($configs,true);
+    foreach ($configs['service_checks'] as $serviceName) {
+        $serviceClass = "HealthChecks\\Service\\{$serviceName}";
+        $services[] = new $serviceClass;
+    }
+} else {
+    $services = [
+        new WebCheck(),
+        new DBCheck(),
+        new DBReplicationCheck(),
+        new ObjectStorageCheck(),
+        new ServerCheck(),
+        new BackupCheck(),
+        new RemoteBackupCheck(),
+    ];
+}
+
 $healthCheckMonitor = new HealthCheckMonitor();
 
 $results = [];
